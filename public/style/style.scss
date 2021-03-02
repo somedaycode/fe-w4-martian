@@ -1,5 +1,34 @@
 @import './reset.scss';
 
-body {
-    font: 1px;
+.transceiver {
+    margin: 0 auto;
+    height: 50rem;
+    width: 62.5rem;
+    border: 1px solid black;
+
+    .transceiver__main {
+        position: relative;
+    }
+
+    .main__arrow{
+        width: 6rem;
+        height: 6rem;
+        background-color: #fff;
+        top: 15.625rem;
+        left: 15.625rem;
+        line-height: 6rem;
+        border: 3px solid black;
+        border-radius: 50%;
+        transform: translate3d(-50%, -50%, 0);
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .arrow {
+            color: #0C5394;
+            font-size: 5rem;
+        }
+    }
 }
+
