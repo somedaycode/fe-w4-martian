@@ -21,14 +21,14 @@
         </div>
       </main>
       <div class="transceiver__info">
-        <form class="info__receive">
+        <form method="POST" action="/receivedData" class="info__receive">
           <label for="receiver"
             >송수신정보
             <input type="text" name="receiver" class="receive__input" />
           </label>
           <button class="receive__btn"><span>해석하기</span></button>
         </form>
-        <form class="info__transmit">
+        <form method="POST" action="/receivedData" class="info__transmit">
           <label for="transmitter"
             >발신정보입력
             <input type="text" name="transmitter" class="transmit__input" />
