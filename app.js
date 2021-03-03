@@ -14,7 +14,10 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+<<<<<<< HEAD
 app.engine('html', require('ejs').renderFile);
+=======
+>>>>>>> 06a80f4 (개발환경 구성 커밋)
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -47,7 +50,11 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
+<<<<<<< HEAD
   res.render('error.html');
+=======
+  res.render('error');
+>>>>>>> 06a80f4 (개발환경 구성 커밋)
 });
 
 module.exports = app;
