@@ -11,10 +11,14 @@ function getArcDeg({ degree, arcNum }) {
   return degree / arcNum;
 }
 
+function strToHex(str) {
+  return str.split('').map((str) => str.charCodeAt(0).toString(16));
+}
+
 function getTextCoordinates(textDeg, { radius, width, height }) {
   const x = Math.cos(degToRadians(textDeg)) * radius * 0.8 + width / 2;
   const y = Math.sin(degToRadians(textDeg)) * radius * 0.8 + height / 2;
   return [x, y];
 }
 
-export { degToRadians, hexToDec, getArcDeg, getTextCoordinates };
+export { degToRadians, hexToDec, getArcDeg, strToHex, getTextCoordinates };
