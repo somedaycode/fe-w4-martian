@@ -1,5 +1,8 @@
 import { _ } from './util.js';
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8ee4b48 (canvas로 송수신기 화면에 출력)
 
 function drawTransceiver() {
   const canvas = _.$('.main__figure');
@@ -79,5 +82,8 @@ function getTextCoordinates(degree, radius, w, h) {
 }
 
 drawTransceiver();
+<<<<<<< HEAD
 =======
 >>>>>>> 06a80f4 (개발환경 구성 커밋)
+=======
+>>>>>>> 8ee4b48 (canvas로 송수신기 화면에 출력)
