@@ -1,8 +1,4 @@
 import { _ } from './util.js';
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 8ee4b48 (canvas로 송수신기 화면에 출력)
 
 function drawTransceiver() {
   const canvas = _.$('.main__figure');
@@ -67,12 +63,11 @@ function hexToDec(dec) {
 }
 
 function insertText(ctx, width, height, radius, degree, arcDegree, num) {
-  const hex = hexToDec(num);
   const halfDegree = arcDegree / 2;
   degree += halfDegree;
   const [x, y] = getTextCoordinates(degree, radius, width, height);
   ctx.font = '1rem serif';
-  ctx.strokeText(hex, x, y);
+  ctx.strokeText(hexToDec(num), x, y);
 }
 
 function getTextCoordinates(degree, radius, w, h) {
@@ -82,8 +77,3 @@ function getTextCoordinates(degree, radius, w, h) {
 }
 
 drawTransceiver();
-<<<<<<< HEAD
-=======
->>>>>>> 06a80f4 (개발환경 구성 커밋)
-=======
->>>>>>> 8ee4b48 (canvas로 송수신기 화면에 출력)
