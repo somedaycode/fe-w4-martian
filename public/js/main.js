@@ -1,4 +1,5 @@
 import { _ } from './util.js';
+<<<<<<< HEAD
 
 function drawTransceiver() {
   const canvas = _.$('.main__figure');
@@ -78,3 +79,5 @@ function getTextCoordinates(degree, radius, w, h) {
 }
 
 drawTransceiver();
+=======
+>>>>>>> 06a80f4 (개발환경 구성 커밋)

@@ -1,9 +1,12 @@
 /node_modules/
 
+<<<<<<< HEAD
 test.html
 
 test.js
 
+=======
+>>>>>>> 06a80f4 (개발환경 구성 커밋)
 *.css
 
 *.css.map
