@@ -1,16 +1,23 @@
 import { _ } from './util.js';
+import { strToHex } from './calculate.js';
 
 export function executeTransmitter() {
+  onInputMessages();
+  onClickTransmitBtn();
+}
+
+function onClickTransmitBtn() {
   const sendBtn = _.$('.transmit__btn');
   _.on(sendBtn, 'click', sendMsgToEarth);
 }
 
 function sendMsgToEarth(e) {
   e.preventDefault();
-  const xhr = new XMLHttpRequest();
   const inputMsg = _.$('.transmit__input');
+  const encodedInput = _.$('.receive__input');
+  const xhr = new XMLHttpRequest();
   const msg = {
-    message: inputMsg.value,
+    message: encodedInput.value,
   };
 
   xhr.onload = () => {
@@ -25,5 +32,19 @@ function sendMsgToEarth(e) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(msg));
 
-  inputMsg.value = '';
+  initInputValue(inputMsg, encodedInput);
+}
+
+function onInputMessages() {
+  const transmitInput = _.$('.transmit__input');
+  _.on(transmitInput, 'input', enCodeText);
+}
+
+function enCodeText({ target }) {
+  const encodedInput = _.$('.receive__input');
+  encodedInput.value = strToHex(target.value);
+}
+
+function initInputValue(...inputs) {
+  return inputs.forEach((input) => (input.value = ''));
 }
