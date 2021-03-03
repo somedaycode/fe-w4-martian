@@ -15,12 +15,15 @@ function sendMsgToEarth(e) {
 
   xhr.onload = () => {
     if (xhr.status === 200 || xhr.status === 201) {
-      console.log(xhr.responseText);
+      const statusMsg = _.$('.transmit__status');
+      statusMsg.textContent = xhr.responseText;
     } else {
-      console.error(xhr.responseText);
+      statusMsg.textContent = xhr.responseText;
     }
   };
   xhr.open('POST', '/receivedData');
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(msg));
+
+  inputMsg.value = '';
 }
