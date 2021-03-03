@@ -1,6 +1,13 @@
 import { _ } from './util.js';
+<<<<<<< HEAD
 import { drawTransceiver } from './drawTransceiver.js';
 import { executeTransmitter } from './transmitter.js';
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8ee4b48 (canvas로 송수신기 화면에 출력)
+>>>>>>> 3243e5a (rebase 충돌 커밋)
 
 const main = () => {
   drawTransceiver();
@@ -75,3 +82,11 @@ function getTextCoordinates(degree, radius, w, h) {
 }
 
 drawTransceiver();
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 06a80f4 (개발환경 구성 커밋)
+=======
+>>>>>>> 8ee4b48 (canvas로 송수신기 화면에 출력)
+>>>>>>> 3243e5a (rebase 충돌 커밋)
