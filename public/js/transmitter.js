@@ -32,6 +32,7 @@ function sendMsgToEarth(e) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(msg));
 
+<<<<<<< HEAD
   initInputValue(inputMsg, encodedInput);
 }
 
@@ -47,4 +48,7 @@ function enCodeText({ target }) {
 
 function initInputValue(...inputs) {
   return inputs.forEach((input) => (input.value = ''));
+=======
+  inputMsg.value = '';
+>>>>>>> aa74038 (메시지의 응답 상태에 따른 dom 조작)
 }
