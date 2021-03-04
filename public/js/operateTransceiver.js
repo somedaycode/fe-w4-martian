@@ -11,42 +11,57 @@ import {
 export function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 3000;
   enCodedStrs.forEach((str, i) => {
-    setTimeout(() => rotateArrow(str, i), delay * (i + 1));
+    setTimeout(() => pointAndBlink(str, i), delay * (i + 1));
   });
 }
 
-function rotateArrow(str) {
+function pointAndBlink(str) {
   if (str === ',') return console.log('다음 단어를 기다리고 있습니다.');
-  const arrow = _.$('.arrow');
   // 더 가까운 쪽으로 가기 위해 currentDeg 값을 구해준다. - 아직 미구현
-  const currentDeg = arrow.style.transform.match(/\d{0,3}\.\d{0,2}/g);
-  const oneArcDeg = 22.5;
-  const defalutDeg = oneArcDeg / 2;
-  const decNumber = hexToDec(str);
-  const movingDeg = defalutDeg + oneArcDeg * decNumber;
-  arrow.style.transform = `rotate(${movingDeg}deg)`;
+  //   const currentDeg = arrow.me.style.transform.match(/\d{0,3}\.\d{0,2}/g);
+  const arrow = {
+    me: _.$('.arrow'),
+    arcDeg: 22.5,
+    defalutDeg: 11.25,
+    pointedNum: hexToDec(str),
+  };
+  const movingDeg = getMovingDeg(arrow);
+  rotateArrow(arrow.me, movingDeg);
 
-  const figure = getFigure(canvas);
-  blinkText(decNumber, oneArcDeg, figure);
+  let count = 0;
+  const blink = setInterval(() => {
+    blinkText(arrow);
+    count += 1;
+    if (count === 2) clearInterval(blink);
+  }, 1000);
 }
 
-function blinkText(decNumber, oneArcDeg, figure) {
-  paintPointedStr(decNumber, oneArcDeg, figure);
+function getMovingDeg({ defalutDeg, arcDeg, pointedNum }) {
+  return defalutDeg + arcDeg * pointedNum;
+}
+
+function rotateArrow(arrow, movingDeg) {
+  arrow.style.transform = `rotate(${movingDeg}deg)`;
+}
+
+function blinkText(arrow) {
+  const figure = getFigure(canvas);
+  paintPointedStr(arrow, figure);
   initTransceiver(figure);
 }
 
-function paintPointedStr(decNumber, oneArcDeg, figure) {
-  figure.degree = oneArcDeg * decNumber;
-  figure.arcDegree = oneArcDeg;
+function paintPointedStr({ pointedNum, arcDeg }, figure) {
+  figure.degree = arcDeg * pointedNum;
+  figure.arcDegree = arcDeg;
   ctx.beginPath();
   ctx.moveTo(figure.width / 2, figure.height / 2);
   ctx.lineWidth = '2';
   ctx.strokeStyle = '#f39c12';
-  insertText(figure, decNumber);
+  insertText(figure, pointedNum);
 }
 
 function initTransceiver(figure) {
   setTimeout(() => {
     strokeFigure(figure);
-  }, 1500);
+  }, 500);
 }
