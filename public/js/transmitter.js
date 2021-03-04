@@ -46,6 +46,7 @@ function enCodeText({ target }) {
   encodedInput.value = strToHex(target.value);
 }
 
+// 회전판 동작이 마무리 되면 사용한다. 현재 주석처리 해놓았다.
 function initInputValue(...inputs) {
   return inputs.forEach((input) => (input.value = ''));
 }
@@ -53,15 +54,17 @@ function initInputValue(...inputs) {
 function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 2000;
   enCodedStrs.forEach((str, i) => {
-    setTimeout(() => pointToStr(str), delay * i);
+    setTimeout(() => pointToStr(str), delay * (i + 1));
   });
 }
 
 function pointToStr(str) {
   if (str === ',') return console.log('다음 단어를 기다리고 있습니다.');
   const arrow = _.$('.arrow');
-  const defalutDeg = 101.25;
+  // 더 가까운 쪽으로 가기 위해 currentDeg 값을 구해준다. - 아직 미구현
+  const currentDeg = arrow.style.transform.match(/\d{0,3}\.\d{0,2}/g);
   const oneArcDeg = 22.5;
+  const defalutDeg = oneArcDeg / 2;
   const movingDeg = defalutDeg + oneArcDeg * hexToDec(str);
   arrow.style.transform = `rotate(${movingDeg}deg)`;
 }
