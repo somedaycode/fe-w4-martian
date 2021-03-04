@@ -19,6 +19,7 @@ function sendMsgToEarth(e) {
   const enCodedData = {
     message: encodedInput.value,
   };
+  moveTransceiverArrow(encodedInput.value);
 
   xhr.onload = () => {
     if (xhr.status === 200 || xhr.status === 201) {
@@ -32,7 +33,7 @@ function sendMsgToEarth(e) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(enCodedData));
 
-  initInputValue(inputMsg, encodedInput);
+  // initInputValue(inputMsg, encodedInput);
 }
 
 function onInputMessages() {
@@ -48,3 +49,13 @@ function enCodeText({ target }) {
 function initInputValue(...inputs) {
   return inputs.forEach((input) => (input.value = ''));
 }
+
+function moveTransceiverArrow([...enCodedStrs]) {
+  const delay = 2000;
+  enCodedStrs.forEach((str, i) => {
+    if (str === ',') i += delay;
+    setTimeout(() => pointToStr(str), delay * i);
+  });
+}
+
+function pointToStr(str) {}
