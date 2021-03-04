@@ -11,7 +11,14 @@ import {
 export function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 3000;
   enCodedStrs.forEach((str, i) => {
-    setTimeout(() => pointAndBlink(str), delay * (i + 1));
+    setTimeout(() => {
+      pointAndBlink(str);
+
+      // 화살표가 모든 문자를 가리킨 이후 인풋창을 초기화 해준다.
+      if (i === enCodedStrs.length - 1) {
+        initInputValue(getAllinputs());
+      }
+    }, delay * (i + 1));
   });
 }
 
@@ -70,4 +77,14 @@ function initTransceiver(figure) {
   setTimeout(() => {
     strokeFigure(figure);
   }, 500);
+}
+
+function getAllinputs() {
+  const inputMsg = _.$('.transmit__input');
+  const encodedInput = _.$('.receive__input');
+  return [inputMsg, encodedInput];
+}
+
+function initInputValue(inputs) {
+  return inputs.forEach((input) => (input.value = ''));
 }
