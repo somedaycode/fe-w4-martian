@@ -1,7 +1,7 @@
 import { _ } from './util.js';
 import {
   degToRadians,
-  hexToDec,
+  decToHex,
   getArcDeg,
   getTextCoordinates,
 } from './calculate.js';
@@ -71,5 +71,5 @@ function insertText(figure, currentNum) {
   ctx.font = '1rem serif';
 
   const [x, y] = getTextCoordinates(textDeg, figure);
-  ctx.strokeText(hexToDec(currentNum), x, y);
+  ctx.strokeText(decToHex(currentNum), x, y);
 }
