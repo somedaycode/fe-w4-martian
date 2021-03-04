@@ -11,14 +11,20 @@ import {
 export function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 3000;
   enCodedStrs.forEach((str, i) => {
-    setTimeout(() => pointAndBlink(str, i), delay * (i + 1));
+    setTimeout(() => pointAndBlink(str), delay * (i + 1));
   });
 }
 
 function pointAndBlink(str) {
-  if (str === ',') return console.log('다음 단어를 기다리고 있습니다.');
+  const screen = _.$('.main__screen > span');
+  if (str === ',') {
+    screen.textContent = '다음 문자를 기다리고 있습니다.';
+    return;
+  }
   // 더 가까운 쪽으로 가기 위해 currentDeg 값을 구해준다. - 아직 미구현
   //   const currentDeg = arrow.me.style.transform.match(/\d{0,3}\.\d{0,2}/g);
+  screen.textContent = '문자 출력중';
+
   const arrow = {
     me: _.$('.arrow'),
     arcDeg: 22.5,
