@@ -1,5 +1,5 @@
 import { _ } from './util.js';
-import { strToHex } from './calculate.js';
+import { hexToDec, strToHex } from './calculate.js';
 
 export function executeTransmitter() {
   onInputMessages();
@@ -53,9 +53,15 @@ function initInputValue(...inputs) {
 function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 2000;
   enCodedStrs.forEach((str, i) => {
-    if (str === ',') i += delay;
     setTimeout(() => pointToStr(str), delay * i);
   });
 }
 
-function pointToStr(str) {}
+function pointToStr(str) {
+  if (str === ',') return console.log('다음 단어를 기다리고 있습니다.');
+  const arrow = _.$('.arrow');
+  const defalutDeg = 101.25;
+  const oneArcDeg = 22.5;
+  const movingDeg = defalutDeg + oneArcDeg * hexToDec(str);
+  arrow.style.transform = `rotate(${movingDeg}deg)`;
+}
