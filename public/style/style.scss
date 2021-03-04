@@ -32,7 +32,8 @@ $halfOfOneArcDeg: 11.25deg;
         .arrow {
             color: #0C5394;
             font-size: 5rem;
-            transform: rotate($defaultArrowDeg);
+            transform: rotate(0deg);
+            transition: transform 0.6s ease-out;
         }
     }
 
