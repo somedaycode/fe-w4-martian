@@ -16,7 +16,7 @@ function sendMsgToEarth(e) {
   const inputMsg = _.$('.transmit__input');
   const encodedInput = _.$('.receive__input');
   const xhr = new XMLHttpRequest();
-  const msg = {
+  const enCodedData = {
     message: encodedInput.value,
   };
 
@@ -25,12 +25,12 @@ function sendMsgToEarth(e) {
       const statusMsg = _.$('.transmit__status');
       statusMsg.textContent = xhr.responseText;
     } else {
-      statusMsg.textContent = xhr.responseText;
+      alert('에러입니다.');
     }
   };
   xhr.open('POST', '/receivedData');
   xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify(msg));
+  xhr.send(JSON.stringify(enCodedData));
 
   initInputValue(inputMsg, encodedInput);
 }
