@@ -1,5 +1,12 @@
 import { _ } from './util.js';
 import { hexToDec, strToHex } from './calculate.js';
+import {
+  canvas,
+  ctx,
+  getFigure,
+  insertText,
+  strokeFigure,
+} from './drawTransceiver.js';
 
 export function executeTransmitter() {
   onInputMessages();
@@ -52,19 +59,39 @@ function initInputValue(...inputs) {
 }
 
 function moveTransceiverArrow([...enCodedStrs]) {
-  const delay = 2000;
+  const delay = 3000;
   enCodedStrs.forEach((str, i) => {
-    setTimeout(() => pointToStr(str), delay * (i + 1));
+    setTimeout(() => rotateArrow(str, i), delay * (i + 1));
   });
 }
 
-function pointToStr(str) {
+function rotateArrow(str) {
   if (str === ',') return console.log('다음 단어를 기다리고 있습니다.');
   const arrow = _.$('.arrow');
   // 더 가까운 쪽으로 가기 위해 currentDeg 값을 구해준다. - 아직 미구현
   const currentDeg = arrow.style.transform.match(/\d{0,3}\.\d{0,2}/g);
   const oneArcDeg = 22.5;
   const defalutDeg = oneArcDeg / 2;
-  const movingDeg = defalutDeg + oneArcDeg * hexToDec(str);
+  const decNumber = hexToDec(str);
+  const movingDeg = defalutDeg + oneArcDeg * decNumber;
   arrow.style.transform = `rotate(${movingDeg}deg)`;
+  paintPointedStr(decNumber, oneArcDeg);
+}
+
+function paintPointedStr(decNumber, oneArcDeg) {
+  const figure = getFigure(canvas);
+  figure.degree = oneArcDeg * decNumber;
+  figure.arcDegree = oneArcDeg;
+  ctx.beginPath();
+  ctx.moveTo(figure.width / 2, figure.height / 2);
+  ctx.lineWidth = '2';
+  ctx.strokeStyle = '#f39c12';
+  insertText(figure, decNumber);
+  initTransceiver(figure);
+}
+
+function initTransceiver(figure) {
+  setTimeout(() => {
+    strokeFigure(figure);
+  }, 1500);
 }
