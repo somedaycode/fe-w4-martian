@@ -69,9 +69,11 @@ function insertText(figure, currentNum) {
   let textDeg = figure.degree;
   textDeg += halfDegree;
   ctx.font = '2rem serif';
+  const txt = decToHex(currentNum);
+  const move = ctx.measureText(txt).width / 2;
 
   const [x, y] = getTextCoordinates(textDeg, figure);
-  ctx.strokeText(decToHex(currentNum), x, y);
+  ctx.strokeText(txt, x - move, y + move);
 }
 
 export { strokeFigure, drawTransceiver, getFigure, insertText, canvas, ctx };
