@@ -1,5 +1,9 @@
 @import './reset.scss';
 
+$defaultArrowDeg: 101.25deg;
+$oneArcDeg: 22.5deg;
+$halfOfOneArcDeg: 11.25deg;
+
 .transceiver {
     margin: 0 auto;
     height: 50rem;
@@ -28,7 +32,7 @@
         .arrow {
             color: #0C5394;
             font-size: 5rem;
-            transform: rotate(90deg);
+            transform: rotate($defaultArrowDeg);
         }
     }
 
