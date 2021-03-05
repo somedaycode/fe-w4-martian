@@ -8,32 +8,37 @@ import {
   strokeFigure,
 } from './drawTransceiver.js';
 
-export async function moveTransceiverArrow([...enCodedStrs]) {
+async function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 3000;
   const msgLength = enCodedStrs.length;
-  const delayPromise = (enCodedStrs) =>
-    new Promise((resolve, reject) => {
-      setTimeout(() => resolve(enCodedStrs), delay);
-    });
 
   for (let i = 0; i < msgLength; i += 1) {
-    const str = await delayPromise(enCodedStrs[i]);
+    const str = await delayPromise(enCodedStrs[i], delay);
     printEncodedTxt(enCodedStrs, i);
     pointAndBlink(str);
 
     //화살표가 모든 문자를 가리킨 이후 3초 후 인풋창을 초기화 해준다.
     if (i === msgLength - 1) {
-      setTimeout(() => {
-        initInputValue(getInputs());
-      }, delay);
+      changeBtnStatus();
     }
   }
 }
 
+function delayPromise(enCodedStrs, delay) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve(enCodedStrs), delay);
+  });
+}
+
 function printEncodedTxt(enCodedStrs, idx) {
-  const [, encodedInput] = getInputs();
+  const { encodedInput } = getInputs();
   const encodedText = enCodedStrs.slice(0, idx + 1).join('');
   encodedInput.value = encodedText;
+}
+
+function changeBtnStatus() {
+  const { translateBtn } = getBtns();
+  translateBtn.disabled = false;
 }
 
 function pointAndBlink(str) {
@@ -42,9 +47,10 @@ function pointAndBlink(str) {
     screen.textContent = '다음 문자를 기다리고 있습니다.';
     return;
   }
+  screen.textContent = '문자 출력중';
+
   // 더 가까운 쪽으로 가기 위해 currentDeg 값을 구해준다. - 아직 미구현
   //   const currentDeg = arrow.me.style.transform.match(/\d{0,3}\.\d{0,2}/g);
-  screen.textContent = '문자 출력중';
 
   const arrow = {
     me: _.$('.arrow'),
@@ -96,9 +102,17 @@ function initTransceiver(figure) {
 function getInputs() {
   const inputMsg = _.$('.transmit__input');
   const encodedInput = _.$('.receive__input');
-  return [inputMsg, encodedInput];
+  return { inputMsg, encodedInput };
 }
 
-function initInputValue(inputs) {
-  inputs.forEach((input) => (input.value = ''));
+function getBtns() {
+  const translateBtn = _.$('.translate');
+  const checkMsgBtn = _.$('.receive-check__btn');
+  return { translateBtn, checkMsgBtn };
 }
+
+// function initInputValue(inputs) {
+//   inputs.forEach((input) => (input.value = ''));
+// }
+
+export { moveTransceiverArrow, getBtns, getInputs };
