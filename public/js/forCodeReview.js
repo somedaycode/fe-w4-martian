@@ -1,3 +1,5 @@
+// original file name = operateTransceiver.js
+
 import { _ } from './util.js';
 import { hexToDec } from './calculate.js';
 import {
