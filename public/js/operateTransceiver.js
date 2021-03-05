@@ -10,20 +10,30 @@ import {
 
 export async function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 3000;
+  const msgLength = enCodedStrs.length;
   const delayPromise = (enCodedStrs) =>
     new Promise((resolve, reject) => {
       setTimeout(() => resolve(enCodedStrs), delay);
     });
 
-  for (let i = 0; i < enCodedStrs.length; i += 1) {
+  for (let i = 0; i < msgLength; i += 1) {
     const str = await delayPromise(enCodedStrs[i]);
+    printEncodedTxt(enCodedStrs, i);
     pointAndBlink(str);
 
-    // 화살표가 모든 문자를 가리킨 이후 인풋창을 초기화 해준다.
-    if (i === enCodedStrs.length - 1) {
-      initInputValue(getAllinputs());
+    //화살표가 모든 문자를 가리킨 이후 3초 후 인풋창을 초기화 해준다.
+    if (i === msgLength - 1) {
+      setTimeout(() => {
+        initInputValue(getInputs());
+      }, delay);
     }
   }
+}
+
+function printEncodedTxt(enCodedStrs, idx) {
+  const [, encodedInput] = getInputs();
+  const encodedText = enCodedStrs.slice(0, idx + 1).join('');
+  encodedInput.value = encodedText;
 }
 
 function pointAndBlink(str) {
@@ -83,12 +93,12 @@ function initTransceiver(figure) {
   }, 500);
 }
 
-function getAllinputs() {
+function getInputs() {
   const inputMsg = _.$('.transmit__input');
   const encodedInput = _.$('.receive__input');
   return [inputMsg, encodedInput];
 }
 
 function initInputValue(inputs) {
-  return inputs.forEach((input) => (input.value = ''));
+  inputs.forEach((input) => (input.value = ''));
 }
