@@ -1,5 +1,8 @@
 import { _ } from './util.js';
 import { strToHex } from './calculate.js';
+import { moveTransceiverArrow } from './operateTransceiver.js';
+
+// operateTranceiver.js의 함수를 통해 화살표가 움직이게 됩니다.
 
 export function executeTransmitter() {
   onInputMessages();
@@ -16,23 +19,24 @@ function sendMsgToEarth(e) {
   const inputMsg = _.$('.transmit__input');
   const encodedInput = _.$('.receive__input');
   const xhr = new XMLHttpRequest();
-  const msg = {
+  const enCodedData = {
     message: encodedInput.value,
   };
+  moveTransceiverArrow(encodedInput.value);
 
   xhr.onload = () => {
     if (xhr.status === 200 || xhr.status === 201) {
       const statusMsg = _.$('.transmit__status');
       statusMsg.textContent = xhr.responseText;
     } else {
-      statusMsg.textContent = xhr.responseText;
+      alert('에러입니다.');
     }
   };
   xhr.open('POST', '/receivedData');
   xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify(msg));
+  xhr.send(JSON.stringify(enCodedData));
 
-  initInputValue(inputMsg, encodedInput);
+  // initInputValue(inputMsg, encodedInput);
 }
 
 function onInputMessages() {
@@ -45,6 +49,7 @@ function enCodeText({ target }) {
   encodedInput.value = strToHex(target.value);
 }
 
+// 회전판 동작이 마무리 되면 사용한다. 현재 주석처리 해놓았다.
 function initInputValue(...inputs) {
   return inputs.forEach((input) => (input.value = ''));
 }

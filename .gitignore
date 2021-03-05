@@ -1,18 +1,9 @@
 /node_modules/
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 0549285 (gitignore update)
 test.html
 
 test.js
 
-<<<<<<< HEAD
-=======
->>>>>>> 06a80f4 (개발환경 구성 커밋)
-=======
->>>>>>> 0549285 (gitignore update)
 *.css
 
 *.css.map

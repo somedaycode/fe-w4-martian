@@ -3,8 +3,12 @@ function degToRadians(degrees) {
   return degrees * (pi / 180);
 }
 
-function hexToDec(dec) {
+function decToHex(dec) {
   return dec.toString(16);
+}
+
+function hexToDec(hex) {
+  return parseInt(hex, 16);
 }
 
 function getArcDeg({ degree, arcNum }) {
@@ -21,4 +25,11 @@ function getTextCoordinates(textDeg, { radius, width, height }) {
   return [x, y];
 }
 
-export { degToRadians, hexToDec, getArcDeg, strToHex, getTextCoordinates };
+export {
+  degToRadians,
+  decToHex,
+  hexToDec,
+  getArcDeg,
+  strToHex,
+  getTextCoordinates,
+};

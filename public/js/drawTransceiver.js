@@ -1,7 +1,7 @@
 import { _ } from './util.js';
 import {
   degToRadians,
-  hexToDec,
+  decToHex,
   getArcDeg,
   getTextCoordinates,
 } from './calculate.js';
@@ -9,7 +9,7 @@ import {
 const canvas = _.$('.main__figure');
 const ctx = canvas.getContext('2d');
 
-export function drawTransceiver() {
+function drawTransceiver() {
   if (canvas.getContext) {
     const figure = getFigure(canvas);
     figure.arcDegree = getArcDeg(figure);
@@ -68,8 +68,12 @@ function insertText(figure, currentNum) {
   const halfDegree = figure.arcDegree / 2;
   let textDeg = figure.degree;
   textDeg += halfDegree;
-  ctx.font = '1rem serif';
+  ctx.font = '2rem serif';
+  const txt = decToHex(currentNum);
+  const move = ctx.measureText(txt).width / 2;
 
   const [x, y] = getTextCoordinates(textDeg, figure);
-  ctx.strokeText(hexToDec(currentNum), x, y);
+  ctx.strokeText(txt, x - move, y + move);
 }
+
+export { strokeFigure, drawTransceiver, getFigure, insertText, canvas, ctx };
