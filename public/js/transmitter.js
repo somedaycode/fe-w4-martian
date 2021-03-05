@@ -16,7 +16,6 @@ function onClickTransmitBtn() {
 
 function sendMsgToEarth(e) {
   e.preventDefault();
-  const inputMsg = _.$('.transmit__input');
   const encodedInput = _.$('.receive__input');
   const xhr = new XMLHttpRequest();
   const enCodedData = {
@@ -35,8 +34,6 @@ function sendMsgToEarth(e) {
   xhr.open('POST', '/receivedData');
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.send(JSON.stringify(enCodedData));
-
-  // initInputValue(inputMsg, encodedInput);
 }
 
 function onInputMessages() {
@@ -47,9 +44,4 @@ function onInputMessages() {
 function enCodeText({ target }) {
   const encodedInput = _.$('.receive__input');
   encodedInput.value = strToHex(target.value);
-}
-
-// 회전판 동작이 마무리 되면 사용한다. 현재 주석처리 해놓았다.
-function initInputValue(...inputs) {
-  return inputs.forEach((input) => (input.value = ''));
 }
