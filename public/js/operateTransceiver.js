@@ -8,18 +8,22 @@ import {
   strokeFigure,
 } from './drawTransceiver.js';
 
-export function moveTransceiverArrow([...enCodedStrs]) {
+export async function moveTransceiverArrow([...enCodedStrs]) {
   const delay = 3000;
-  enCodedStrs.forEach((str, i) => {
-    setTimeout(() => {
-      pointAndBlink(str);
+  const delayPromise = (enCodedStrs) =>
+    new Promise((resolve, reject) => {
+      setTimeout(() => resolve(enCodedStrs), delay);
+    });
 
-      // 화살표가 모든 문자를 가리킨 이후 인풋창을 초기화 해준다.
-      if (i === enCodedStrs.length - 1) {
-        initInputValue(getAllinputs());
-      }
-    }, delay * (i + 1));
-  });
+  for (let i = 0; i < enCodedStrs.length; i += 1) {
+    const str = await delayPromise(enCodedStrs[i]);
+    pointAndBlink(str);
+
+    // 화살표가 모든 문자를 가리킨 이후 인풋창을 초기화 해준다.
+    if (i === enCodedStrs.length - 1) {
+      initInputValue(getAllinputs());
+    }
+  }
 }
 
 function pointAndBlink(str) {
