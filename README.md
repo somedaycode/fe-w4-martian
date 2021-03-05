@@ -19,6 +19,7 @@ Branch - step4
 - [x] 상황판에서 문자가 출력 중인지 다음 문자를 기다리는 중인지 알려준다.
 - [x] 모든 문자를 화살표가 가르켰다면 인풋창을 초기화 해준다.
 - [x] 서버로 전송된 메시지 promise로 다시 받아 해석하기
+- [ ] 화살표가 가까운 쪽으로 이동
 - [ ] myPromise 객체 완전히 구현하기 - 주말로 미루겠다.
 
 ![](https://images.theconversation.com/files/96726/original/image-20150930-19533-1by0fu3.jpg?ixlib=rb-1.1.0&rect=0%2C0%2C2000%2C970&q=45&auto=format&w=1356&h=668&fit=crop)
