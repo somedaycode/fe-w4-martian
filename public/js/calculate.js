@@ -19,6 +19,10 @@ function strToHex(str) {
   return str.split('').map((str) => str.charCodeAt(0).toString(16));
 }
 
+function hexToStr(hex) {
+  return String.fromCharCode(hexToDec(hex));
+}
+
 function getTextCoordinates(textDeg, { radius, width, height }) {
   const x = Math.cos(degToRadians(textDeg)) * radius * 0.8 + width / 2;
   const y = Math.sin(degToRadians(textDeg)) * radius * 0.8 + height / 2;
@@ -31,5 +35,6 @@ export {
   hexToDec,
   getArcDeg,
   strToHex,
+  hexToStr,
   getTextCoordinates,
 };
